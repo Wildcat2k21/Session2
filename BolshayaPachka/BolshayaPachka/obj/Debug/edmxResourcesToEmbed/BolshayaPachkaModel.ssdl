@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище BolshayaPachkaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Material">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="50" />
+    <Property Name="Coast" Type="money" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="MinAmount" Type="int" Nullable="false" />
+    <Property Name="Peckage" Type="int" Nullable="false" />
+    <Property Name="unit" Type="nchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Shipper">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="45" Nullable="false" />
+    <Property Name="Type" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="INN" Type="bigint" Nullable="false" />
+    <Property Name="Quality" Type="tinyint" Nullable="false" />
+    <Property Name="StartTime" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TotalShippers">
+    <Key>
+      <PropertyRef Name="MaterialID" />
+      <PropertyRef Name="ShipperID" />
+    </Key>
+    <Property Name="MaterialID" Type="int" Nullable="false" />
+    <Property Name="ShipperID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TotalShippers_Material">
+    <End Role="Material" Type="Self.Material" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TotalShippers" Type="Self.TotalShippers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TotalShippers">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TotalShippers_Shipper">
+    <End Role="Shipper" Type="Self.Shipper" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TotalShippers" Type="Self.TotalShippers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipper">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TotalShippers">
+        <PropertyRef Name="ShipperID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище BolshayaPachkaModelContainer">
+    <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shipper" EntityType="Self.Shipper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TotalShippers" EntityType="Self.TotalShippers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TotalShippers_Material" Association="Self.FK_TotalShippers_Material">
+      <End Role="Material" EntitySet="Material" />
+      <End Role="TotalShippers" EntitySet="TotalShippers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TotalShippers_Shipper" Association="Self.FK_TotalShippers_Shipper">
+      <End Role="Shipper" EntitySet="Shipper" />
+      <End Role="TotalShippers" EntitySet="TotalShippers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
