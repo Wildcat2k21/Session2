@@ -11,40 +11,57 @@
 * Для того, чтобы проект корректно запустился, необхадима среда Visual Studio 2016 и новее
 * Библиотека Net Framework
 * Cервер системы управления базами данных Microsoft Sql Server. (Есть возможность локального подключения)
+* MSS Managment Studio - Cистема управления и администрирования баз данных
 
 ### Установка
 
-##### Для начало необхадимо скачать среду Visual Studio
+**Для начало необхадимо скачать среду Visual Studio**
 
-
- Чем новее среда, тем лучше, рекомендуется Visual Studio 2019 Community.
+Чем новее среда, тем лучше, рекомендуется Visual Studio 2019 Community.
 
 	Visual Studio 2019 Community - бесплатная среда разработки, пробный период которой не ограничен, если вы создадите учетную запись, среда подходит для обучения, бесплтна для обучающихся и участников открытого исходного кода.
 
 
-Затем нужно скачать Microsoft Sql Server
+**Затем нужно скачать Microsoft Sql Server**
 
 	Microsoft Sql Server - это системы управления базами данных (СУБД), также имеется
 	бесплатная неограниченная версия, подходящая для проверки работоспособности и обучения.
 
 
-После этапов выше, нужно восстановить базу данных BoshayaPachka - файл BolshayaPachka.bak
+**После этапов выше, нужно восстановить базу данных BoshayaPachka**
+
 	В MSS Managment Studio - базы данных - восстановить (Выберите файл BolshayaPachka.bak)
 
+---
 
-Затем необхадимо заменить название data source ***ORIGAMI*** во всех атрибутах connectionString в тэгах add, сгрупированных в тэге connectionStrings файла App.config проекта на название вашего сервера (По умолчанию это название вашего компьютера, которое можно просмотреть в свойствах компьютера или при подключении к ядру в MSS Managment Studio):
+### Подготовка приложения к работе ###
 
+После всех перечисленных этапов необхадимо заменить название data source ***ORIGAMI*** во всех атрибутах connectionString в тэгах add, сгрупированных в тэге connectionStrings файла App.config проекта на название вашего сервера (По умолчанию это название вашего компьютера, которое можно просмотреть в свойствах компьютера или при подключении к ядру в MSS Managment Studio):
+
+Было:
 ```
 App.config
 	<ConnectionStrings>
-	<add name = "MSSconnection" connectionString="data source = ***ORIGAMI***; initial catalog..."/>
-	<add name = "Something" connectionString="data source = ***ORIGAMI***; initial catalog..."/>
+	<add name = "MSSconnection" connectionString="data source = ORIGAMI; initial catalog..."/>
+	<add name = "Something" connectionString="data source = ORIGAMI; initial catalog..."/>
 	.
 	.
 	.
 	<ConnectionStrings/>
 ```
 
+Стало (*Вместо MY_SERVER_NAME название вашего сервера*):
+
+```
+App.config
+	<ConnectionStrings>
+	<add name = "MSSconnection" connectionString="data source = MY_SERVER_NAME; initial catalog..."/>
+	<add name = "Something" connectionString="data source = MY_SERVER_NAME; initial catalog..."/>
+	.
+	.
+	.
+	<ConnectionStrings/>
+```
 
 
 После того, как все будет заменено, можно запускать проект.
