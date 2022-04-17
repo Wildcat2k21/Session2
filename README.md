@@ -19,46 +19,40 @@
 
  Чем новее среда, тем лучше, рекомендуется Visual Studio 2019 Community.
 
-```
 	Visual Studio 2019 Community - бесплатная среда разработки, пробный период которой не ограничен, если вы создадите учетную запись, среда подходит для обучения, бесплтна для обучающихся и участников открытого исходного кода.
 
-```
 
-```
-	Затем нужно скачать Microsoft Sql Server - это системы управления базами данных (СУБД), также имеется
+Затем нужно скачать Microsoft Sql Server
+
+	Microsoft Sql Server - это системы управления базами данных (СУБД), также имеется
 	бесплатная неограниченная версия, подходящая для проверки работоспособности и обучения.
-```
 
-```
-	После этапов выше, нужно восстановить базу данных BoshayaPachka - файл BolshayaPachka.bak
-```
 
-```
+После этапов выше, нужно восстановить базу данных BoshayaPachka - файл BolshayaPachka.bak
 	В MSS Managment Studio - базы данных - восстановить (Выберите файл BolshayaPachka.bak)
+
+
+Затем необхадимо заменить название data source ***ORIGAMI*** во всех атрибутах connectionString в тэгах add, сгрупированных в тэге connectionStrings файла App.config проекта на название вашего сервера (По умолчанию это название вашего компьютера, которое можно просмотреть в свойствах компьютера или при подключении к ядру в MSS Managment Studio):
+
+```
+App.config
+	<ConnectionStrings>
+	<add name = "MSSconnection" connectionString="data source = ***ORIGAMI***; initial catalog..."/>
+	<add name = "Something" connectionString="data source = ***ORIGAMI***; initial catalog..."/>
+	.
+	.
+	.
+	<ConnectionStrings/>
 ```
 
-
-	Затем необхадимо заменить название data source ***ORIGAMI*** во всех атрибутах connectionString в тэгах add, сгрупированных в тэге connectionStrings файла App.config проекта на название вашего сервера (По умолчанию это название вашего компьютера, которое можно просмотреть в свойствах компьютера или при подключении к ядру в MSS Managment Studio):
-	>App.config
-	>> <ConnectionStrings>
-	>>> <add name = "MSSconnection" connectionString="data source = ***ORIGAMI***; initial catalog..."
-	>>> <add name = "Something" connectionString="data source = ***ORIGAMI***; initial catalog..."
-	>>> .
-	>>> .
-	>>> .
-	>> <ConnectionStrings/>
-	>App.config
-	
 
 
 После того, как все будет заменено, можно запускать проект.
 
-```
 	После запуска проекта, скампилированные файлы exe можно использовать как приложение, не запуская их в среде
 	VisualStudio, для этого клиените правой кнопкой мыши по проекту, перейдите в директорию проекта, в папку bin\debug
 	там будут скампилированные файлы вашей программы.
-```
 
-## Авторы
+## Автор
 
 [**Wildcat2k21**](https://github.com/Wildcat2k21)
